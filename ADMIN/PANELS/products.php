@@ -43,29 +43,30 @@
                 </div>
                 <span class="line-dark"></span>
             </div>
-            <form class="ud w-100 py-2">
+            <form class="ud w-100 py-2" action="models.php" method="POST" enctype="multipart/form-data" >
                 <div class="lr">
                     <div class="ud w-50">
                         <div class="ud w-100">
                             <label for="item-name">Item name:</label>
-                            <input type="text" name="" id="item-name" class="form-control" placeholder="Enter the item name here">
+                            <input type="text" name="product-name" id="item-name" class="form-control" placeholder="Enter the item name here">
                         </div>
                         <div class="ud w-100 py-2">
                             <label for="item-quantity">Quantity in stock:</label>
-                            <input type="number" name="" id="item-quantity" class="form-control" placeholder="Enter item quantity in stock here">
+                            <input type="number" name="product-quantity" id="item-quantity" class="form-control" placeholder="Enter item quantity in stock here">
                         </div>
                         <div class="ud w-100 py-2">
                             <label for="item-price">Item Price:</label>
-                            <input type="number" name="" id="item-price" class="form-control" placeholder="Enter item price here">
+                            <input type="number" name="product-price" id="item-price" class="form-control" placeholder="Enter item price here">
                         </div>
                     </div>
                     <div class="item-photo w-50 ud aic py-2 ">
                         <img src="./IMAGES/add-image.png" alt="" class="img-lg bd-dark my-2 image_preview">
-                        <input type="file" name="item_img" class="form-control w-50" id="item_img" accept="Image/*">
+                        <input type="file" name="product-image" class="form-control w-50" id="item_img">
+                        <!-- accept="Image/*" -->
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary w-100">Add Product</button>
+                <button type="submit" class="btn btn-primary w-100">Add Product</button>
             </form>
         </div>
     </div>

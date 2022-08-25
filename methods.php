@@ -130,30 +130,23 @@ function verifyUser($varEmail, $varPassword)
 			</script>';
     }
 }
-function add_product($productName, $productQuantity, $productPrice, $productGender, $productImage)
+function add_product($productName, $productQuantity, $productPrice,  $productImage)
 {
 
     if (!empty($productPrice)) {
         if (!empty($productImage)) {
             if (!empty($productName)) {
                 if (!empty($productQuantity)) {
-                    if (!empty($productGender)) {
-                        $sql_stmt = "INSERT INTO tbl_products(product_name,product_quantity,product_price,product_gender,product_image) VALUES('" . $productName . "','" . $productQuantity . "','" . $productPrice . "','" . $productGender . "','" . $productImage . "')";
-                        $result = setData($sql_stmt);
 
+                    $sql_stmt = "INSERT INTO tbl_products(product_name,product_quantity,product_price,product_photo) VALUES('" . $productName . "','" . $productQuantity . "','" . $productPrice . "','" . $productImage . "')";
+                    $result = setData($sql_stmt);
 
-                        echo ("<script>
+                    echo ("<script>
                 alert('Product Added successfully');
                 window.location.href='admin.php';
                 </script>");
 
-                        return $result;
-                    } else {
-                        echo ("<script>
-                alert('Error on gender input');
-                window.location.href='admin.php';
-                </script>");
-                    }
+                return $result;
                 } else {
                     echo ("<script>
             alert('Error on quantity input');
