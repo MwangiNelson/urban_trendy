@@ -1,6 +1,9 @@
 * {
   font-family: "Barlow Condensed", sans-serif;
 }
+* {
+  transition: all 0.2s ease;
+}
 *::-webkit-scrollbar {
   width: 0.5vw;
 }
@@ -23,7 +26,10 @@ nav {
 }
 .bg-grey {
   background-color: hsla(0, 0%, 85%, 0.5);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(1px);
+}
+.bg-grey-nav {
+  background-color: #d9d9d9;
 }
 .jsb {
   justify-content: space-between;
@@ -33,6 +39,9 @@ nav {
 }
 .jcs {
   justify-content: start;
+}
+.br-5 {
+  border-radius: 5px;
 }
 .jsc {
   justify-self: center;
@@ -73,6 +82,12 @@ nav {
   top: 0;
   height: 100vh;
 }
+.bg-blue-photo {
+  background: url("./images/bluephoto.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
 .black-span {
   width: 6vw;
   background-color: #333;
@@ -84,15 +99,14 @@ nav {
   border-radius: 5px;
   margin-left: 5px;
 }
-.menu:hover {
-  backdrop-filter: blur(4px);
-  background-color: rgba(255, 255, 255, 0.5);
-}
 .font-xlarge {
   font-size: 10vh;
 }
 .pb-s-10 {
   padding-block-start: 10rem;
+}
+.h-80vh {
+  height: 80vh;
 }
 .pb-e-5 {
   padding-block-end: 5rem;
@@ -121,8 +135,19 @@ nav {
   height: 1.5px;
   background-color: #333;
 }
+.h-fit {
+  height: fit-content;
+}
+.h-100vh {
+  height: 100vh;
+}
+.g-1 {
+  gap: 1rem;
+}
 .p-fixed {
   position: fixed;
+}
+.left-50 {
   left: 50%;
 }
 .c-blue {
@@ -130,7 +155,6 @@ nav {
 }
 .bg-blue {
   background-color: #1c24f5;
-  height: fit-content;
 }
 .txt-uc {
   text-transform: uppercase;
@@ -235,6 +259,7 @@ nav {
   color: #000;
   padding: 0.5rem;
   width: 75%;
+  border-radius: 3px;
   border: none;
   text-transform: uppercase;
   box-shadow: 0px 0px 10px #000;
@@ -245,11 +270,28 @@ nav {
   text-shadow: 0px 0px 10px #fff;
   color: #fff;
 }
+.h-10 {
+  height: 10vh;
+}
+.top-link {
+  transition: all 0.3s;
+}
+.top-link:hover {
+  transform: scale(1.02);
+}
 .cart-head a {
   color: #000;
 }
 .cart-head a:hover {
   color: #333;
+}
+
+.bg-white {
+  background-color: #fff;
+  color: #333;
+}
+.h-50vh {
+  height: 40vh;
 }
 .bg-blue-cart {
   background-color: #1c24f5;
@@ -280,10 +322,134 @@ nav {
 .w-custom-30 {
   width: 35vw;
 }
+.jce {
+  justify-content: end;
+}
 .color-blue {
   color: #0088ff;
   cursor: pointer;
 }
 .g-5 {
   gap: 5rem;
+}
+.side-nav {
+  left: -50%;
+  height: 100vh;
+  color: #000;
+  transition: all 0.5s ease;
+}
+.side-nav a {
+  color: #000;
+  text-align: center;
+}
+.side-nav a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+.l-1 {
+  width: 2px;
+  background-color: #000;
+  width: 5vw;
+  transform: rotate(45deg);
+}
+.l-1 {
+  width: 2px;
+  background-color: #000;
+  width: 5vw;
+  transform: rotate(-45deg);
+}
+.back-icon {
+  width: 5vw;
+  height: 4vh;
+  object-fit: contain;
+}
+.img-logo {
+  width: 35vw;
+  object-fit: cover;
+  height: 10vh;
+}
+.custom-dark {
+  background-color: #d9d9d9;
+  color: #333;
+}
+.side-btn {
+  background-color: #d9d9d9;
+  padding: 3rem;
+  color: #333;
+  border: none;
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.side-btn:hover {
+  background-color: #bdbdbd;
+  color: #333;
+}
+.bg-custom-blue {
+  background-color: #0088ff;
+}
+.panel {
+  display: none;
+  flex-direction: column;
+  color: #fff;
+  padding: 2rem;
+  background-color: #0088ff;
+  border-radius: 3px;
+}
+.h-custom-fit {
+  height: 80vh;
+}
+.btn-logout {
+  background-color: #b14040;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+.logout {
+  padding-block: 4rem;
+}
+.btn-logout:hover {
+  background-color: #d85f5f;
+  transform: scale(1.05);
+}
+.active-btn {
+  background-color: #333;
+  color: #fff;
+  font-size: larger;
+}
+.add-products {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  height: inherit;
+  backdrop-filter: blur(2px);
+}
+.p-absolute {
+  position: absolute;
+  left: 15%;
+}
+.num {
+  font-family: monospace;
+  padding-block: 0.5rem;
+  font-size: 5vh;
+}
+td {
+  padding: 1rem;
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+.img-lg {
+  width: 15vw;
+  height: 20vh;
+  object-fit: contain;
+}
+.line-straight {
+  height: 70%;
+  width: 2px;
+  background-color: #707070;
 }

@@ -7,7 +7,7 @@
 
 <body>
     <nav class="custom-nav jsb aic lr w-100 bg-grey">
-        <div class="menu ud jsb px-4">
+        <div class="menu ud jsb px-4" id="menu-btn">
             <span class="black-span"></span>
             <span class="black-span w-50"></span>
             <span class="black-span w-75"></span>
@@ -19,13 +19,14 @@
             </button>
         </div>
     </nav>
-    <section class="bg-blue w-100 ud aic pb-s-7 c-white">
+    <?php include("components/sidenav.php"); ?>
+    <section class="bg-blue h-fit w-100 ud aic pb-s-7 c-white">
         <div class="head2 ud aic w-100 jcc p-0 m-0">
             <h2>STORE</h2>
             <span class="span-orange shadow-white w-25"></span>
         </div>
         <div class="header w-75 lr jcs txt-uc px-4">
-            <a href="index.php">
+            <a href="index.php" class="top-link">
                 <h3>HOME</h3>
             </a>
             <h3>/STORE</h3>
@@ -83,5 +84,17 @@
 
     </section>
 </body>
+<script>
+    const sideNav = document.getElementById("side-nav");
+    const menuBtn = document.getElementById("menu-btn");
+    const closeBtn = document.getElementById("close-btn");
+
+    menuBtn.addEventListener("click", function() {
+        sideNav.style.left = "0";
+    });
+    closeBtn.addEventListener("click", function() {
+        sideNav.style.left = "-50%";
+    });
+</script>
 
 </html>

@@ -7,6 +7,7 @@
 
 <body>
     <?php include("components/navbar.php"); ?>
+    <?php include("components/sidenav.php"); ?>
     <section class="main w-100 lr aic">
         <div class="white w-50 ud aic pb-s-10 g-2">
             <div class="ud w-75 g-2 pb-e-5">
@@ -43,7 +44,7 @@
                     <div class="square jsc ud w-75 aic p-2">
                         <h4 class="f-abo m-0">SATISFACTION</h4>
                         <span class="span-orange w-25"></span>
-                        <img src="images/fashion.jpg" alt="" class="img-md py-4">
+                        <img src="images/smile.png" alt="" class="img-md py-4">
                         <h4 class="p-4">Customer reviews, blogs, streamers ...name them. They cant help but reccomend us.</h4>
                     </div>
                     <div class="square jsc ud w-75 aic p-2">
@@ -56,7 +57,7 @@
             </div>
 
         </div>
-        <div class="blue w-50 p-fixed">
+        <div class="blue w-50 p-fixed left-50">
             <div class="pb-s-10 ud aic w-100">
                 <div id="carouselExampleIndicators" class="carousel slide w-75 ud aic jcc" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -110,10 +111,25 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
+                </div>\
+                <div class="btn-holder w-75">
+                    <a href="ADMIN/admin.php"><button class="btn btn-light">ADMINISTRATOR</button></a>
                 </div>
             </div>
         </div>
     </section>
 </body>
+<script>
+    const sideNav = document.getElementById("side-nav");
+    const menuBtn = document.getElementById("menu-btn");
+    const closeBtn = document.getElementById("close-btn");
+
+    menuBtn.addEventListener("click", function() {
+        sideNav.style.left = "0";
+    });
+    closeBtn.addEventListener("click", function() {
+        sideNav.style.left = "-50%";
+    });
+</script>
 
 </html>
