@@ -1,3 +1,7 @@
+<?php
+$session = session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -130,6 +134,16 @@
     closeBtn.addEventListener("click", function() {
         sideNav.style.left = "-50%";
     });
+
+    var open_mod = document.getElementById("pane");
+
+    function close_log() {
+        open_mod.style.display = "none";
+    }
+
+    function open_log() {
+        open_mod.style.display = "inline-flex";
+    }
 </script>
 
 </html>

@@ -1,3 +1,7 @@
+<?php
+$session = session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,16 +24,16 @@
                 </div>
                 <span class="line-dark w-50"></span>
             </div>
-            <form class="ud w-100 py-4">
+            <form class="ud w-100 py-4" method="POST" action="login-module.php">
                 <div class="ud w-100">
                     <label for="user-email">E mail:</label>
-                    <input type="email" name="" id="user-email" class="form-control" placeholder="Enter your email here">
+                    <input type="email" name="user-email" id="user-email" class="form-control" placeholder="Enter your email here">
                 </div>
                 <div class="ud w-100 py-4">
                     <label for="user-password">Password:</label>
-                    <input type="password" name="" id="user-password" class="form-control" placeholder="Enter your password here">
+                    <input type="password" name="user-password" id="user-password" class="form-control" placeholder="Enter your password here">
                 </div>
-                <button id="login-btn" type="button" class="btn btn-primary w-100">LOG IN</button>
+                <button id="login-btn" type="submit" class="btn btn-primary w-100">LOG IN</button>
                 <div class="lr jcc aic py-3">
                     <h5 class="px-3">Don't have an account? </h5>
                     <a href="register.php"><button class="btn btn-outline-secondary " type="button">SIGN UP</button></a>

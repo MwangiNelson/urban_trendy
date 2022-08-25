@@ -1,3 +1,7 @@
+<?php
+$session = session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,10 +17,18 @@
             <span class="black-span w-75"></span>
         </div>
         <a href="index.php" class="p-0 m-0"><img src="images/UrbanTrendy.png" class="nav-logo" alt=""></a>
-        <div class="user-sect px-3">
-            <button class="btn btn-primary btn-custom">
-                SIGN IN
-            </button>
+        <div class="user-sect lr px-3 w-25 jce">
+            <?php
+            if (!isset($_SESSION['user_name'])) {
+                echo "<a href='login.php'><button class='btn btn-primary btn-custom'><i class='fa-solid fa-arrow-right-to-bracket px-1'></i>SIGN IN</button></a>";
+            } else {
+                echo "<a class='w-50'><button class='btn btn-light txt-uc w-100' onclick='open_log()' id='show_mod'><h3> HI ," . $_SESSION['user_name'] . "👋🏽 </h3> </button></a>";
+            }
+            ?>
+        </div>
+        <div class="logout-nav" id="pane">
+            <button class="btn btn-primary w-50 mx-1" id="close_mod" onclick="close_log()">Cancel</button>
+            <a href="logout.php" class="w-50"><button class="btn btn-danger w-100 mx-1">Log Out</button></a>
         </div>
     </nav>
     <?php include("components/sidenav.php"); ?>
@@ -133,6 +145,15 @@
     closeBtn.addEventListener("click", function() {
         sideNav.style.left = "-50%";
     });
+    var open_mod = document.getElementById("pane");
+
+    function close_log() {
+        open_mod.style.display = "none";
+    }
+
+    function open_log() {
+        open_mod.style.display = "inline-flex";
+    }
 </script>
 
 </html>

@@ -408,6 +408,19 @@ nav {
   border-radius: 4px;
   padding: 0.5rem;
 }
+
+.logout-nav {
+  background-color: #332614ad;
+  width: 23.5%;
+  position: absolute;
+  z-index: 5;
+  top: 90%;
+  display: none;
+  flex-direction: row;
+  border-radius: 5px;
+  padding: 1rem;
+  right: 0.8vw;
+}
 .logout {
   padding-block: 4rem;
 }

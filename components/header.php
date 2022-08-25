@@ -16,6 +16,10 @@
 <!-- fontawesome icons -->
 <script src="https://kit.fontawesome.com/db540a34d6.js" crossorigin="anonymous"></script>
 
+
+<!-- tab icon -->
+<link rel="icon" href="images/UT.png" type="image/x-icon">
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
