@@ -10,9 +10,9 @@ $fileName = $_FILES['product-image']['name'];
 $update_res = add_product($varProductName, $varProductQuantity, $varProductPrice, $fileName);
 
 if ($update_res == true) {
-    $file = $_FILES['product_image'];
-    $fileType = $_FILES['product_image']['type'];
-    $fileLocationTemp = $_FILES['product_image']['tmp_name'];
+    $file = $_FILES['product-image'];
+    $fileType = $_FILES['product-image']['type'];
+    $fileLocationTemp = $_FILES['product-image']['tmp_name'];
 
     $fileDest = '../assets/';
     move_uploaded_file($fileLocationTemp, $fileDest . $fileName);

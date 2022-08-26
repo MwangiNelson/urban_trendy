@@ -5,7 +5,7 @@
     </div>
     <div class="users-tbl h-75 ud aic w-100">
         <table class="w-100">
-            <thead>
+            <thead class="cart-thead">
                 <tr>
                     <th>#</th>
                     <th>PRODUCT PHOTO</th>
@@ -16,18 +16,41 @@
                 </tr>
             </thead>
             <tbody class="tbody">
-                <tr>
-                    <td>PRD12</td>
-                    <td><img src="assets/fashion1.jpg" alt="" class="img-tbl"></td>
-                    <td>ITEM NAME</td>
-                    <td>$ 500 . 00</td>
-                    <td>300</td>
-                    <td>
-                        <button class="btn btn-danger">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
+
+
+                <?php
+                $sql_Select_prods = "SELECT * FROM tbl_products;"; //Obtaining all products
+                $data_products = getDat2($sql_Select_prods);
+
+                if ($data_products != 0) {
+                    for ($i = 0; $i < count($data_products); $i++) {
+                        $product_price = $data_products[$i]["product_price"];
+                        $product_name = $data_products[$i]["product_name"];
+                        $product_quantity = $data_products[$i]["product_quantity"];
+                        $product_id = $data_products[$i]["product_id"];
+                        $product_image = $data_products[$i]["product_photo"];
+                ?>
+
+                        <tr class="user-row">
+                            <td><?php echo $product_id; ?></td>
+                            <td><img class="img-cart" src="../assets/<?php echo $product_image; ?>" alt=""></td>
+                            <td><?php echo $product_name; ?></td>
+                            <td> $ <?php echo $product_price; ?> . 00</td>
+                            <td><?php echo $product_quantity; ?> pcs</td>
+                            <td>
+                                <form action="delete.php" method="post">
+                                    <input class="cat_id" value="<?php echo $product_id; ?>" name="product_id">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+
+                <?php
+                    }
+                } else {
+                    echo "<tr>No Products found</tr>";
+                }
+                ?>
             </tbody>
         </table>
     </div>
@@ -43,7 +66,7 @@
                 </div>
                 <span class="line-dark"></span>
             </div>
-            <form class="ud w-100 py-2" action="models.php" method="POST" enctype="multipart/form-data" >
+            <form class="ud w-100 py-2" action="models.php" method="POST" enctype="multipart/form-data">
                 <div class="lr">
                     <div class="ud w-50">
                         <div class="ud w-100">

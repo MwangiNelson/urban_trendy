@@ -1,5 +1,73 @@
 <?php
 $session = session_start();
+require_once("methods.php");
+
+if (isset($_POST["add_cart_btn"])) {
+    if (isset($_SESSION["cart"])) {
+        $productID = $_POST["product_id"];
+        $product_name = $_POST["product_name"];
+        $product_price = intval($_POST["product_price"]);
+        $product_quantity = intval($_POST["product_quantity"]);
+        $product_image = $_POST['product_img'];
+        $item_array_id = array_column($_SESSION["cart"], "product_id");
+
+        if (!in_array($productID, $item_array_id)) {
+            $count = count($_SESSION["cart"]);
+            $item_array = array(
+                'product_id' => $productID,
+                'product_name' => $product_name,
+                'product_price' => $product_price,
+                'product_quantity' => $product_quantity,
+                'product_img' => $product_image,
+            );
+            $_SESSION["cart"][$count] = $item_array;
+            if (isset($_SESSION["totals"]["totalQuantity"])) {
+                $_SESSION["totals"]["totalQuantity"] += $product_quantity;
+                $_SESSION["totals"]["totalPrice"] += $product_quantity * $product_price;
+            } else {
+                $_SESSION["totals"]["totalQuantity"] = $product_quantity;
+                $_SESSION["totals"]["totalPrice"] = $product_quantity * $product_price;
+            }
+
+            echo "<script> alert('Success Adding to cart'); </script>";
+            // echo $_SESSION["cart"];
+            // print_r($_SESSION["totals"]);
+        } else {
+
+            echo "<script> alert('Item already in cart'); </script>";
+        }
+    } else {
+        //session_destroy();
+        //setting cart variables
+        $productID = $_POST["product_id"];
+        $product_name = $_POST["product_name"];
+        $product_price = intval($_POST["product_price"]);
+        $product_quantity = intval($_POST["product_quantity"]);
+        $product_image = $_POST['product_img'];
+
+        $item_array = array(
+            'product_id' => $productID,
+            'product_name' => $product_name,
+            'product_price' => $product_price,
+            'product_quantity' => $product_quantity,
+            'product_img' => $product_image,
+        );
+
+        $_SESSION["cart"][0] = $item_array;
+
+        if (isset($_SESSION["totals"]["totalQuantity"])) {
+            $_SESSION["totals"]["totalQuantity"] += $product_quantity;
+            $_SESSION["totals"]["totalPrice"] += ($product_quantity * $product_price);
+        } else {
+            $_SESSION["totals"]["totalQuantity"] = $product_quantity;
+            $_SESSION["totals"]["totalPrice"] = ($product_quantity * $product_price);
+        }
+
+        echo "<script> alert('Success Adding to cart'); </script>";
+        // echo $_SESSION["cart"];
+        // print_r($_SESSION["cart"]);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,55 +111,42 @@ $session = session_start();
             </a>
             <h3>/STORE</h3>
         </div>
-        <div class="display-grid w-100 p-3">
-            <div class="item-card ud aic jcc">
-                <img src="images/bag.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <a href="cart.php" class="w-100"><button class="store-btn">ADD TO CART</button></a>
-            </div>
-            <div class="item-card ud aic jcc">
-                <img src="images/bag2.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <button class="store-btn">ADD TO CART</button>
-            </div>
-            <div class="item-card ud aic jcc">
-                <img src="images/bag.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <button class="store-btn">ADD TO CART</button>
-            </div>
-            <div class="item-card ud aic jcc">
-                <img src="images/bag.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <button class="store-btn">ADD TO CART</button>
-            </div>
-            <div class="item-card ud aic jcc">
-                <img src="images/bag.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <button class="store-btn">ADD TO CART</button>
-            </div>
-            <div class="item-card ud aic jcc">
-                <img src="images/bag.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <button class="store-btn">ADD TO CART</button>
-            </div>
-            <div class="item-card ud aic jcc">
-                <img src="images/bag.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <button class="store-btn">ADD TO CART</button>
-            </div>
-            <div class="item-card ud aic jcc">
-                <img src="images/bag.png" class="img-store py-3" alt="">
-                <h4>LEATHER BLACK LEATHER BAG MADE OF LEATHER</h4>
-                <h4>$ 500.00</h4>
-                <button class="store-btn">ADD TO CART</button>
-            </div>
+        <div class="display-grid w-100 p-3 g-2">
+            <?php
+            $sql_Select = "SELECT * FROM tbl_products;"; //Obtaining all products
+            $data = getDat2($sql_Select);
+
+            if ($data != 0) {
+                for ($i = 0; $i < count($data); $i++) {
+                    $product_id = $data[$i]["product_id"];
+                    $product_name = $data[$i]["product_name"];
+                    $product_price = $data[$i]["product_price"];
+                    $product_image = $data[$i]["product_photo"];
+            ?>
+
+                    <div class="item-card ud aic jcc">
+                        <img src="./assets/<?php echo $product_image; ?>" class="img-store py-3" alt="">
+                        <h4><?php echo $product_name; ?></h4>
+                        <h4>$ <?php echo $product_price; ?></h4>
+
+                        <form class="w-100 aic jcc lr" action="store.php" method="POST">
+                            <button type="submit" name="add_cart_btn" class="store-btn" id="<?php $product_id; ?>">
+                                Add To Cart
+                            </button>
+                            <input class="cat_id" name="product_id" value="<?php echo $product_id; ?> ">
+                            <input class="cat_id" value="1" name="product_quantity" style="width:2vw; font-size:2.5vh; align-items:center;">
+                            <input class="cat_id" name="product_price" value="<?php echo $product_price; ?> ">
+                            <input class="cat_id" name="product_name" value="<?php echo $product_name; ?> ">
+                            <input class="cat_id" name="product_img" value="<?php echo $product_image; ?> ">
+                        </form>
+                    </div>
+
+            <?php
+                }
+            } else {
+                echo "No products found";
+            }
+            ?>
         </div>
 
     </section>
@@ -109,13 +164,13 @@ $session = session_start();
     });
     var open_mod = document.getElementById("pane");
 
-function close_log() {
-    open_mod.style.display = "none";
-}
+    function close_log() {
+        open_mod.style.display = "none";
+    }
 
-function open_log() {
-    open_mod.style.display = "inline-flex";
-}
+    function open_log() {
+        open_mod.style.display = "inline-flex";
+    }
 </script>
 
 </html>

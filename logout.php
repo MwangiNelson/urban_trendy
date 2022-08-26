@@ -3,8 +3,8 @@
 session_start();
 unset($_SESSION['user_name']);
 unset($_SESSION['user_id']);
-// unset($_SESSION['cart']);
-// unset($_SESSION['totals']);
+unset($_SESSION['cart']);
+
 
 session_destroy();
 

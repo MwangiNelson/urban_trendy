@@ -3,33 +3,50 @@
         <h2>USERS</h2>
         <span class="line-dark"></span>
     </div>
-    <div class="users-tbl h-75 ud aic w-100">
+    <div class="users-tbl h-75 ud aic w-100 txt-uc">
         <table class="w-100">
-            <thead>
+            <thead class="cart-thead">
                 <tr>
                     <th>#</th>
-                    <th>PROFILE PHOTO</th>
                     <th>USERNAME</th>
                     <th>NAME</th>
                     <th>EMAIL</th>
-                    <th>PHONE NUMBER</th>
                     <th>OPTIONS</th>
                 </tr>
             </thead>
             <tbody class="tbody">
-                <tr>
-                    <td>USR12</td>
-                    <td><img src="assets/teen.png" alt="" class="img-xxsm"></td>
-                    <td>SIR DEEZ</td>
-                    <td>JOHNSON WANGENGI</td>
-                    <td>johnsonwangengi@gmail.com</td>
-                    <td>(+254)714 165-105 </td>
-                    <td>
-                        <button class="btn btn-danger">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
+                <?php
+                $sql_Select = "SELECT * FROM tbl_users WHERE user_role_id = 1;"; //Obtaining all users
+                $data = getDat2($sql_Select);
+
+                if ($data != 0) {
+                    for ($i = 0; $i < count($data); $i++) {
+                        $user_name = $data[$i]["user_app_name"];
+                        $user_full_name = $data[$i]["user_full_name"];
+                        $user_email = $data[$i]["user_email"];
+                        $user_id = $data[$i]["users_id"];
+                ?>
+
+                        <tr class="c-white">
+                            <td><?php echo $user_id; ?></td>
+                            <td><?php echo $user_name; ?></td>
+                            <td><?php echo $user_full_name; ?></td>
+                            <td><?php echo $user_email; ?></td>
+                            <td>
+                                <form action="delete_user.php" method="post">
+                                    <input class="cat_id" value="<?php echo $user_id; ?>" name="user_id">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+
+                <?php
+                    }
+                } else {
+                    echo "No Users found";
+                }
+                ?>
+
             </tbody>
         </table>
     </div>

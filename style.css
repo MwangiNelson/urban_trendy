@@ -266,7 +266,7 @@ nav {
   transition: all 0.2s ease-in;
 }
 .store-btn:hover {
-  background-color: rgb(0, 0, 0);
+  background-color: #333;
   text-shadow: 0px 0px 10px #fff;
   color: #fff;
 }
@@ -307,6 +307,8 @@ nav {
   background-color: rgba(0, 0, 0, 0.473);
   font-weight: bold;
   backdrop-filter: blur(4px);
+  top: 0;
+  position: sticky;
 }
 .cart-thead th {
   padding: 1rem;
@@ -453,6 +455,10 @@ td {
   padding: 1rem;
   text-align: center;
 }
+.h-cart{
+  height: 70vh;
+  overflow-y: scroll;
+}
 th {
   text-align: center;
 }
@@ -465,4 +471,22 @@ th {
   height: 70%;
   width: 2px;
   background-color: #707070;
+}
+.img-cart {
+  width: 6vw;
+  height: 9vw;
+  object-fit: cover;
+}
+.cat_id {
+  display: none;
+}
+.users-tbl {
+  color: #333;
+  padding-inline: 3rem;
+  /* height: 60vh; */
+  overflow-y: scroll;
+}
+.table-container {
+  height: 75vh;
+  overflow-y: scroll;
 }

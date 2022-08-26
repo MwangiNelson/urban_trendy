@@ -1,5 +1,30 @@
 <?php
 $session = session_start();
+
+if (isset($_POST["deleteItem"])) {
+    if (isset($_SESSION["cart"])) {
+        $removableElement = $_POST['currentItem'];
+        $itemTotal = $_POST['currentItemTotal'];
+        $itemQuantity = $_POST['currentItemQuantity'];
+        $varTotalPrice =  $_SESSION["totals"]["totalPrice"];
+
+        array_splice($_SESSION['cart'], $removableElement, 1);
+
+
+        if ($varTotalPrice < 0) {
+            unset($_SESSION['cart']);
+        } else {
+            $_SESSION["totals"]["totalQuantity"] -= $itemQuantity;
+        }
+
+        if ($itemQuantity <= 0) {
+            unset($_SESSION['cart']);
+        } else {
+            $varTotalPrice -= $itemTotal;
+            $_SESSION["totals"]["totalPrice"] = $varTotalPrice;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +72,7 @@ $session = session_start();
             <h3>/CART </h3>
         </div>
         <div class="lr w-100 jsb p-4 py-1">
-            <div class="w-75 table-container color-dark h-70 px-4">
+            <div class="w-75 table-container color-dark px-4">
                 <table class="w-100 color-dark">
                     <thead class="cart-thead">
                         <tr class="aic tac jcc">
@@ -59,30 +84,64 @@ $session = session_start();
                         </tr>
                     </thead>
                     <tbody class="tbody">
-                        <tr class="py-4 aic tac jcc">
-                            <td class="w-15-vw ">
-                                <div class="ud g-1 jcc aic p-4">
-                                    <img src="images/bag.png" alt="" class="img-cart">
-                                    <h4>LOOKU MOTO</h4>
-                                </div>
-                            </td>
-                            <td class="w-15-vw">
-                                <h4>Made in Italy</h4>
-                            </td>
-                            <td>
-                                <h4>2</h4>
-                            </td>
-                            <td>
-                                <h4> $ 50.00</h4>
-                            </td>
-                            <td>
-                                <div class="lr g-1 jcc aic">
-                                    <button class="btn btn-danger">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php if (isset($_SESSION['cart'])) : ?>
+                            <?php $currentItem = 0; ?>
+                            <?php if (!empty($_SESSION['cart'])) : ?>
+                                <?php foreach ($_SESSION['cart'] as $cartItem) : ?>
+                                    <tr class="py-4 aic tac jcc">
+                                        <td class="w-15-vw ">
+                                            <div class="ud g-1 jcc aic p-4">
+                                                <img src="./assets/<?php echo $cartItem['product_img']; ?>" alt="" class="img-cart">
+                                                <h4><?php echo $cartItem['product_name']; ?></h4>
+                                            </div>
+                                        </td>
+                                        <td class="w-15-vw">
+                                            <h4>Made in Italy</h4>
+                                        </td>
+                                        <td class="product-amt">
+                                            <button class="btn btn-outline-dark ">+</button>
+                                            <span id="value" class="px-4"><?php echo $cartItem['product_quantity']; ?></span>
+                                            <button class="btn btn-outline-dark ">-</button>
+                                        </td>
+                                        <td id="price">
+                                            $ <?php echo $cartItem['product_price']; ?> .00
+                                        </td>
+
+                                        <td>
+                                            <form action="cart.php" method="post">
+
+                                                <button class="btn btn-danger" type="submit" name="deleteItem">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                                <input type="hidden" class="cat_id" name="currentItem" value="<?php echo $currentItem; ?>">
+                                                <input type="hidden" class="cat_id" name="currentItemQuantity" value="<?php echo $cartItem['product_quantity']; ?>">
+                                                <input type="hidden" class="cat_id" name="currentItemTotal" value="<?php echo ($cartItem['product_price'] * $cartItem['product_quantity']); ?>">
+
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                    <?php $currentItem++; ?>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <tr class="w-100 p-4">
+                                    <td class="w-100 p-3 empty">
+                                        <?php echo "No products in cart"; ?>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php else : ?>
+                            <tr class="w-100 p-4 jcs">
+                                <th></th>
+                                <th></th>
+                                <th class="p-3 jcs">
+                                    <h2 class="txt-uc">
+                                        <?php echo "No products in cart"; ?>
+                                    </h2>
+                                </th>
+
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -93,20 +152,39 @@ $session = session_start();
                 </div>
                 <div class="px-4 ud w-100 g-1">
                     <div class="lr w-100 jsb">
-                        <h3>TOTAL PRICE:</h3>
-                        <h3>$ 500 . 00</h3>
+                        <h3>TOTAL ITEMS:</h3>
+                        <h3><?php
+                            if (!isset($_SESSION['totals'])) {
+                                echo '0';
+                            } else {
+                                echo $_SESSION["totals"]["totalQuantity"] . ' items';
+                            }
+                            ?></h3>
                     </div>
                     <div class="lr w-100 jsb">
                         <h3>DISCOUNT:</h3>
-                        <h3>$ 20 . 00</h3>
+                        <h3><?php if (!isset($_SESSION['totals'])) {
+                                echo '0';
+                            } else {
+                                echo "$ 0.00";
+                            } ?></h3>
                     </div>
                     <div class="lr w-100 jsb">
                         <h3>DELIVERY FEE:</h3>
-                        <h3>$ 7 . 50</h3>
+                        <h3><?php if (!isset($_SESSION['totals'])) {
+                                echo '0';
+                            } else {
+                                echo '$ 0.00';
+                            } ?></h3>
                     </div>
                     <div class="lr w-100 jsb">
                         <h3>TOTAL PAYABLE:</h3>
-                        <h3>$ 512 . 50</h3>
+
+                        <h3><?php if (!isset($_SESSION['totals'])) {
+                                echo '0';
+                            } else {
+                                echo '$ ' . intval($_SESSION["totals"]["totalPrice"]) . '.00';
+                            } ?></h3>
                     </div>
                 </div>
                 <div class="ud w-100 jcc aic">
@@ -114,21 +192,11 @@ $session = session_start();
                     <h4>By proceeding with payments you agree with our</h4>
                     <h4 class="color-blue">TERMS & CONDITIONS</h4>
                 </div>
-                <!-- <div class="ud g-1 aic">
-                    <button class="visa">
-                        <img src="assets/visa.png" class="img-xsm" alt="">
-                    </button>
-                </div> -->
 
-                <div class="ud aic w-100 jcc">
-                    <div class="m-2 md:m-4 w-75" id="paypal-button-container">
-                    </div>
-                    <a href="store" class="w-75">
-                        <button class="btn btn-outline-secondary w-100">
-                            Continue shopping
-                        </button>
-                    </a>
 
+                <div class="ud aic w-100 aic jsb">
+                    <button class="btn btn-success p-3 w-100">PLACE ORDER</button>
+                    <!-- <form action="logout.php"><button class="btn btn-danger">Kill Session</button></form> -->
                 </div>
             </div>
         </div>
