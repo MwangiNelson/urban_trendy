@@ -44,7 +44,7 @@ session_start();
 
         <div class="lr aic jcc g-1 color-white">
             <h3>Welcome</h3>
-            <h3 class="c-blue txt-uc">ADMINISTRATOR</h3>
+            <h3 class="c-blue txt-uc"><?php echo $_SESSION['user_name']; ?></h3>
         </div>
     </nav>
     <section class="w-100 lr aic pb-s-7">

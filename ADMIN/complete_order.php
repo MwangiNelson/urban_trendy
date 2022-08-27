@@ -6,7 +6,7 @@ $order_id = $_POST['order_id'];
 
 $sql_query = "UPDATE tbl_orders SET order_status = 2 WHERE order_id = '" . $order_id . "'";
 
-$deletion = setData($order_id);
+$deletion = setData($sql_query);
 if ($deletion = true) {
     echo " <script>
     window.location.href ='admin.php';

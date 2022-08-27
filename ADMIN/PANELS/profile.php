@@ -2,7 +2,7 @@
         <div class="ud panel-head aic py-4 txt-uc w-100 ">
             <h2>ORDERS</h2>
             <span class="span-orange w-25"></span>
-            <div class="users-tbl h-80vh py-4 ud aic w-100 txt-uc">
+            <div class="users-tbl h-custom-admin my-4 ud aic w-100 txt-uc">
                 <table class="w-100">
                     <thead class="cart-thead">
                         <tr>
@@ -30,9 +30,9 @@
                                 $order_status = $data[$i]["order_status"];
                         ?>
 
-                                <tr class="c-white <?php if ($order_status = 1) {
+                                <tr class="c-white <?php if ($order_status == 1) {
                                                         echo "PENDING";
-                                                    } elseif ($order_status = 2) {
+                                                    } elseif ($order_status == 2) {
                                                         echo "COMPLETED";
                                                     }; ?>">
                                     <td><?php echo $order_id; ?></td>
@@ -40,19 +40,24 @@
                                     <td><?php echo $order_item; ?></td>
                                     <td><?php echo $product_quantity; ?></td>
                                     <td><?php echo $order_price; ?></td>
-                                    <td><?php echo $order_status; ?></td>
+                                    <td><?php if ($order_status == 1) {
+                                            echo "PENDING";
+                                        } elseif ($order_status == 2) {
+                                            echo "COMPLETED";
+                                        }; ?></td>
                                     <td>
-                                        <div class="lr g-1 aic">
-                                            <form action="delete_order.php" method="post">
-                                                <input class="cat_id" value="<?php echo $order_id; ?>" name="order_id">
-                                                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                                            </form>
+                                        <div class="lr g-1 aic jce">
                                             <?php if ($order_status == 1) { ?>
                                                 <form action="complete_order.php" method="post">
                                                     <input class="cat_id" value="<?php echo $order_id; ?>" name="order_id">
-                                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-clipboard-check"></i>ACCEPT ORDER</button>
+                                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-clipboard-check px-2"></i>ACCEPT ORDER</button>
                                                 </form>
                                             <?php }; ?>
+                                            <form action="delete_order.php" method="post">
+                                                <input class="cat_id" value="<?php echo $order_id; ?>" name="de_order_id">
+                                                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                            </form>
+
 
                                             <!-- <form action="update_user.php" method="post">
                                         <input class="cat_id" value="" name="user_id">

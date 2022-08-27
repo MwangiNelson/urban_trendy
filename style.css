@@ -293,6 +293,9 @@ nav {
 .h-50vh {
   height: 40vh;
 }
+.h-custom-admin{
+  height: 60vh;
+}
 .bg-blue-cart {
   background-color: #1c24f5;
   color: #fff;
@@ -483,13 +486,13 @@ th {
 .users-tbl {
   color: #333;
   padding-inline: 3rem;
-  /* height: 60vh; */
   overflow-y: scroll;
 }
 .table-container {
   height: 75vh;
   overflow-y: scroll;
 }
+
 .btn-cart {
   border: none;
   background-color: #1c23f500;
