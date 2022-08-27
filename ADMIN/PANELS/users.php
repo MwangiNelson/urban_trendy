@@ -1,7 +1,7 @@
 <div class=" w-75 h-custom-fit panel g-1" id="user-panel">
     <div class="ud panel-head aic py-4 txt-uc w-100 ">
         <h2>USERS</h2>
-        <span class="line-dark"></span>
+        <span class="span-orange w-25"></span>
     </div>
     <div class="users-tbl h-75 ud aic w-100 txt-uc">
         <table class="w-100">
@@ -33,10 +33,17 @@
                             <td><?php echo $user_full_name; ?></td>
                             <td><?php echo $user_email; ?></td>
                             <td>
-                                <form action="delete_user.php" method="post">
-                                    <input class="cat_id" value="<?php echo $user_id; ?>" name="user_id">
-                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                                </form>
+                                <div class="lr g-1 aic">
+                                    <form action="delete_user.php" method="post">
+                                        <input class="cat_id" value="<?php echo $user_id; ?>" name="user_id">
+                                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                    </form>
+                                    <!-- <form action="update_user.php" method="post">
+                                        <input class="cat_id" value="" name="user_id">
+                                        <button type="submit" class="btn btn-warning"><i class="fa-solid fa-pen"></i></button>
+                                    </form> -->
+                                </div>
+
                             </td>
                         </tr>
 
@@ -60,27 +67,34 @@
                     <h3>ADD USER</h3>
                     <button class="btn btn-danger px-3" onclick="closeUserModule()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                <span class="line-dark"></span>
+                <span class="line-dark w-50"></span>
             </div>
-            <form class="ud w-100 py-2">
-                <div class="ud w-75">
-                    <small class="form-text text-muted">The default user profile will be used. Any edits should be done on the user profile section.</small>
-                </div>
+            <form class="ud w-100 py-2" method="post" action="../register-module.php">
                 <div class="ud w-100">
-                    <label for="user-name">User name:</label>
-                    <input type="text" name="" id="user-name" class="form-control" placeholder="Enter the user name here">
+                    <label for="user-name">Username:</label>
+                    <input type="text" name="user_name" id="user-name" class="form-control" placeholder="Enter the user name here">
+                </div>
+                <div class="lr jss w-100 g-1">
+                    <div class="w-50">
+                        <label for="first_name"> <b>First name:</b></label>
+                        <input id="first_name" type="text" class="form-control w-100" name="first_name">
+                    </div>
+                    <div class="w-50">
+                        <label for="last_name"> <b>Last name:</b></label>
+                        <input id="last_name" type="text" class="form-control w-100" name="last_name">
+                    </div>
                 </div>
                 <div class="ud w-100 py-2">
                     <label for="user-email">User Email:</label>
-                    <input type="email" name="" id="user-email" class="form-control" placeholder="Enter user email">
-                </div>
-                <div class="ud w-100 py-2">
-                    <label for="phone-number">Phone Number:</label>
-                    <input type="number" name="" id="phone-number" class="form-control" placeholder="Enter user phone number here">
+                    <input type="email" name="user_email" id="user-email" class="form-control" placeholder="Enter user email">
                 </div>
                 <div class="ud w-100 py-2">
                     <label for="user-password">Default user password:</label>
-                    <input type="password" name="" id="user-password" class="form-control" placeholder="Enter default user password here">
+                    <input type="password" name="password_1" id="user-password" class="form-control" placeholder="Enter default user password here">
+                </div>
+                <div class="ud w-100 py-2">
+                    <label for="user-password">Confirm user password:</label>
+                    <input type="password" name="password_2" id="user-password" class="form-control" placeholder="Enter default user password here">
                     <small class="form-text text-muted"><b>Suggestion :</b> Use an easy to remember password <i>eg. Password123 </i></small>
                 </div>
 
@@ -90,7 +104,7 @@
                     </div> -->
 
 
-                <button type="button" class="btn btn-primary w-100">Add Product</button>
+                <button type="submit" class="btn btn-primary w-100">Add User</button>
             </form>
         </div>
     </div>

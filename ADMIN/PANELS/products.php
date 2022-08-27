@@ -1,7 +1,7 @@
 <div class=" w-75 h-custom-fit bg-yellow panel g-1" id="products-panel">
     <div class="ud panel-head aic py-4 txt-uc w-100 ">
         <h2>PRODUCTS</h2>
-        <span class="line-dark"></span>
+        <span class="span-orange w-25"></span>
     </div>
     <div class="users-tbl h-75 ud aic w-100">
         <table class="w-100">
@@ -64,7 +64,7 @@
                     <h3>ADD PRODUCTS</h3>
                     <button class="btn btn-danger px-3" onclick="closeModule()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                <span class="line-dark"></span>
+                <span class="line-dark w-50"></span>
             </div>
             <form class="ud w-100 py-2" action="models.php" method="POST" enctype="multipart/form-data">
                 <div class="lr">

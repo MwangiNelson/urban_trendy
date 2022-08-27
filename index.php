@@ -23,7 +23,12 @@ $session = session_start();
                     Date night? Camping? Elegant? We have it all
                 </h4>
             </div>
-            <a href="store.php" class="w-75"><button class="hero-btn lr aic jcc g-2 p-2 w-100 font-large">VISIT STORE <i class="fa-solid fa-arrow-right"></i></button></a>
+            <?php if (!isset($_SESSION['user_name'])) {
+                echo "<button class='hero-btn lr w-75 aic jcc g-2 p-2 font-large' onclick='requestLogin()' >VISIT STORE <i class='fa-solid fa-arrow-right'></i></button>";
+            } else {
+                echo "<a href='store.php' class='w-75'><button class='hero-btn lr aic jcc g-2 p-2 w-100 font-large'>VISIT STORE <i class='fa-solid fa-arrow-right'></i></button></a>";
+            }
+            ?>
             <span class="line-dark w-75"></span>
             <div class="lr">
                 <img src="images/scroll-bar.png" alt="" class="img-sm">
@@ -115,9 +120,6 @@ $session = session_start();
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                </div>\
-                <div class="btn-holder w-75">
-                    <a href="ADMIN/admin.php"><button class="btn btn-light">ADMINISTRATOR</button></a>
                 </div>
             </div>
         </div>
@@ -143,6 +145,10 @@ $session = session_start();
 
     function open_log() {
         open_mod.style.display = "inline-flex";
+    }
+
+    function requestLogin() {
+        alert("Please Log In or Create an account to access the store services");
     }
 </script>
 

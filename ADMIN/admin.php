@@ -64,11 +64,11 @@ session_start();
                 </button>
                 <button class="side-btn" id="profile-btn">
                     <i class="fa-solid font-large fa-address-card"></i>
-                    PROFILE
+                    ORDERS
                 </button>
             </div>
             <div class="logout px-4 w-100">
-                <a href="../index.php">
+                <a href="../logout.php">
                     <button class="btn-logout w-100">
                         LOGOUT
                     </button>
@@ -83,7 +83,7 @@ session_start();
         <?php include("PANELS/profile.php"); ?>
     </section>
     <div class="branding ud jcc aic p-4 w-100">
-        <h4 class="color-yellow">copyright DUKAKUU® 2022 </h4>
+        <h4 class="color-yellow">copyright URBANTRENDY® 2022 </h4>
     </div>
 </body>
 <script>

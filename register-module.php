@@ -42,14 +42,21 @@ if (($_POST['password_1']) != ($_POST['password_2'])) {
                 $res_insert = setData($sql_insert2);
 
                 if ($res_insert = true) {
-                    echo ("<script>
-					window.location.href='index.php';
-					alert('Thank you for signing up.');
+                    if ($_SESSION['user_role_id'] == "2") {
+                        echo ("<script>
+					window.location.href='ADMIN/admin.php';
+					alert('New User Successfully created');
 					</script>");
-
-                    $sql2 = "SELECT * FROM tbl_users where user_email = '" . $varEmail . "'";
-                    $result2 = getData($sql2);
-                    $_SESSION['user_name'] = $result2['user_app_name'];
+                    } else {
+                        $sql2 = "SELECT * FROM tbl_users where user_email = '" . $varEmail . "'";
+                        $result2 = getData($sql2);
+                        $_SESSION['user_name'] = $result2['user_app_name'];
+                        
+                        echo ("<script>
+                        window.location.href='index.php';
+                        alert('Thank you for signing up.');
+                        </script>");
+                    }
                 } else {
                     echo ("<script>
 					window.location.href='login.php';

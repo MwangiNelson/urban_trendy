@@ -13,12 +13,15 @@ if (isset($_POST["deleteItem"])) {
 
         if ($varTotalPrice < 0) {
             unset($_SESSION['cart']);
+            unset($_SESSION['totals']);
+
         } else {
             $_SESSION["totals"]["totalQuantity"] -= $itemQuantity;
         }
 
         if ($itemQuantity <= 0) {
             unset($_SESSION['cart']);
+            unset($_SESSION['totals']);
         } else {
             $varTotalPrice -= $itemTotal;
             $_SESSION["totals"]["totalPrice"] = $varTotalPrice;
@@ -195,7 +198,9 @@ if (isset($_POST["deleteItem"])) {
 
 
                 <div class="ud aic w-100 aic jsb">
-                    <button class="btn btn-success p-3 w-100">PLACE ORDER</button>
+                    <a href="cart_data.php" class="w-100 aic ud">
+                        <button class="btn btn-success p-3 w-100">PLACE ORDER</button>
+                    </a>
                     <!-- <form action="logout.php"><button class="btn btn-danger">Kill Session</button></form> -->
                 </div>
             </div>

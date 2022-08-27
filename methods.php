@@ -98,12 +98,16 @@ function verifyUser($varEmail, $varPassword)
 
                         //if the user role is '1' thats a user_CLIENT atapelekwa home page
                         if ($res2['role_name'] == 'USER_CLIENT') {
+                            $_SESSION['user_id'] = $res['users_id'];
                             $_SESSION['user_name'] = $res['user_app_name'];
+                            $_SESSION['user_role_id'] = $res['user_role_id'];
                             echo ("<script>
 									window.location.href='index.php';
 									alert('Login Successful.');
 									</script>");
                         } elseif ($res2['role_name'] == 'USER_ADMIN') {
+                            $_SESSION['user_name'] = $res['user_app_name'];
+                            $_SESSION['user_role_id'] = $res['user_role_id'];
                             echo ("<script>
                             window.location.href='ADMIN/admin.php';
 									alert('Welcome Admin');
@@ -130,6 +134,20 @@ function verifyUser($varEmail, $varPassword)
 			</script>';
     }
 }
+function get_total_users()
+{
+    $sql_query = "SELECT count(users_id) FROM `tbl_users`";
+    $link = connect();
+    if (mysqli_query($link, $sql_query)) {
+        $result = getData($sql_query);
+        return $result;
+    } else {
+        echo ("<script>
+			alert('Error '" . mysqli_error($link) . ");
+			</script>");
+        return false;
+    }
+}
 function add_product($productName, $productQuantity, $productPrice,  $productImage)
 {
 
@@ -146,7 +164,7 @@ function add_product($productName, $productQuantity, $productPrice,  $productIma
                 window.location.href='admin.php';
                 </script>");
 
-                return $result;
+                    return $result;
                 } else {
                     echo ("<script>
             alert('Error on quantity input');
@@ -171,4 +189,9 @@ function add_product($productName, $productQuantity, $productPrice,  $productIma
         window.location.href='admin.php';
         </script>");
     }
+}
+function placeOrder($clientId, $itemName, $itemQuantity, $itemPrice)
+{
+    $sql_place_order = "INSERT INTO `tbl_orders` (`order_client_id`, `order_item`, `order_price`, `order_quantity`, `order_status`) VALUES ('" . $clientId . "', '" . $itemName . "', '" . $itemPrice . "', '" . $itemQuantity . "', '1');";
+    setData($sql_place_order);
 }

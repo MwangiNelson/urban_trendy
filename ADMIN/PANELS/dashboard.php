@@ -1,7 +1,7 @@
 <div class="ud w-75 aic bg-custom-blue h-custom-fit g-1" id="dashboard-panel">
-    <div class="ud panel-head aic py-4 txt-uc w-100 ">
+    <div class="ud panel-head aic py-4 c-white txt-uc w-100 ">
         <h2>DASHBOARD</h2>
-        <span class="line-dark"></span>
+        <span class="span-orange w-25"></span>
     </div>
     <div class="lr w-100">
         <div class="w-75 ud aic color-dark h-inherit g-1">

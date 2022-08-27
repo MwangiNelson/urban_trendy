@@ -85,13 +85,23 @@ if (isset($_POST["add_cart_btn"])) {
             <span class="black-span w-75"></span>
         </div>
         <a href="index.php" class="p-0 m-0"><img src="images/UrbanTrendy.png" class="nav-logo" alt=""></a>
-        <div class="user-sect lr px-3 w-25 jce">
+        <div class="user-sect lr px-3 w-25 aic jce g-1">
             <?php
             if (!isset($_SESSION['user_name'])) {
-                echo "<a href='login.php'><button class='btn btn-primary btn-custom'><i class='fa-solid fa-arrow-right-to-bracket px-1'></i>SIGN IN</button></a>";
-            } else {
-                echo "<a class='w-50'><button class='btn btn-light txt-uc w-100' onclick='open_log()' id='show_mod'><h3> HI ," . $_SESSION['user_name'] . "👋🏽 </h3> </button></a>";
-            }
+            ?>
+                <a href='login.php'><button class='btn btn-primary btn-custom'><i class='fa-solid fa-arrow-right-to-bracket px-1'></i>SIGN IN</button></a>
+            <?php
+            } else { ?>
+                <a href="cart.php">
+                    <button class="btn-cart p-3 ud jcc aic">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                </a>
+                <a class='w-50'><button class='btn btn-light txt-uc w-100' onclick='open_log()' id='show_mod'>
+                        <h3> HI ,<?php echo $_SESSION['user_name']; ?>"👋🏽 </h3>
+                    </button></a>
+
+            <?php }
             ?>
         </div>
         <div class="logout-nav" id="pane">
