@@ -51,7 +51,7 @@ if (($_POST['password_1']) != ($_POST['password_2'])) {
                         $sql2 = "SELECT * FROM tbl_users where user_email = '" . $varEmail . "'";
                         $result2 = getData($sql2);
                         $_SESSION['user_name'] = $result2['user_app_name'];
-                        $_SESSION['user_id'] = $res['users_id'];
+                        $_SESSION['user_id'] = $result2['users_id'];
 
                         echo ("<script>
                         window.location.href='index.php';
